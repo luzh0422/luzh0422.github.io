@@ -9,6 +9,8 @@ tags:
 
 本文主要讲解在Mac上搭建opengl开发环境，opengl开发主要要用到GLFW、GLAD、SOIL、GLM、ASSIMP这几个库，下面我会一一讲述这几个库在Mac上的环境配置。
 
+<!--more-->
+
 ### GLFW
 
 ### GLAD

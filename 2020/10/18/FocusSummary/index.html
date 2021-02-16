@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Focus Summary基础属性介绍focusable用来定义一个View是否可以被focus。只有当一个View的focusable属性为true时才可以被focus，换言之当一个View的focusable属性为false， 则它永远不会被focus。 focusMode用来定义一个CompositeView获取焦点时，是由CompositeView的子孙节点先获得焦点，还是由Composi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FocusSummary">
+<meta property="og:url" content="http://example.com/2020/10/18/FocusSummary/index.html">
+<meta property="og:site_name" content="ddpumpkin&#39;s blog">
+<meta property="og:description" content="Focus Summary基础属性介绍focusable用来定义一个View是否可以被focus。只有当一个View的focusable属性为true时才可以被focus，换言之当一个View的focusable属性为false， 则它永远不会被focus。 focusMode用来定义一个CompositeView获取焦点时，是由CompositeView的子孙节点先获得焦点，还是由Composi">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-10-18T06:17:09.000Z">
+<meta property="article:modified_time" content="2021-02-16T03:25:16.050Z">
+<meta property="article:author" content="ddpumpkin">
+<meta property="article:tag" content="UI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/10/18/FocusSummary/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>FocusSummary | ddpumpkin's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ddpumpkin's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome to my blog!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/18/FocusSummary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ddpumpkin">
+      <meta itemprop="description" content="记录一些我喜欢的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ddpumpkin's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FocusSummary
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-18 14:17:09" itemprop="dateCreated datePublished" datetime="2020-10-18T14:17:09+08:00">2020-10-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-16 11:25:16" itemprop="dateModified" datetime="2021-02-16T11:25:16+08:00">2021-02-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Focus-Summary"><a href="#Focus-Summary" class="headerlink" title="Focus Summary"></a>Focus Summary</h1><h3 id="基础属性介绍"><a href="#基础属性介绍" class="headerlink" title="基础属性介绍"></a>基础属性介绍</h3><h4 id="focusable"><a href="#focusable" class="headerlink" title="focusable"></a>focusable</h4><p>用来定义一个View是否可以被focus。只有当一个View的focusable属性为true时才可以被focus，换言之当一个View的focusable属性为false， 则它永远不会被focus。</p>
+<h4 id="focusMode"><a href="#focusMode" class="headerlink" title="focusMode"></a>focusMode</h4><p>用来定义一个CompositeView获取焦点时，是由CompositeView的子孙节点先获得焦点，还是由CompositeView自己先获得焦点。(注：这个属性生效的前提是CompositeView.focusable = true)</p>
+<p>focusMode的值为枚举类型：[CompositeView.FocusMode.SelfFirst, CompositeView.FocusMode.DescendantFirst]。</p>
+<ol>
+<li>CompositeView.FocusMode.SelfFirst：由CompositeView自己先获得焦点；</li>
+<li>CompositeView.FocusMode.DescendantFirst：由CompositeView的子孙节点先获得焦点；</li>
+</ol>
+<a id="more"></a>
+
+<h3 id="focus-及focus链的构建；"><a href="#focus-及focus链的构建；" class="headerlink" title="focus()及focus链的构建；"></a>focus()及focus链的构建；</h3><h4 id="focus-介绍"><a href="#focus-介绍" class="headerlink" title="focus()介绍"></a>focus()介绍</h4><p>focus()是让一个控件获得焦点的主要方法。</p>
+<p>一个View可以获得焦点有几个必要条件：</p>
+<ol>
+<li>focusable属性为true；</li>
+<li>view在一棵绘制树上；</li>
+<li>view及view的祖先节点的visibility属性和enabled属性都为true；</li>
+</ol>
+<h4 id="view获得焦点后如何调整一颗绘制树的focus链"><a href="#view获得焦点后如何调整一颗绘制树的focus链" class="headerlink" title="view获得焦点后如何调整一颗绘制树的focus链"></a>view获得焦点后如何调整一颗绘制树的focus链</h4><p>假设当前一棵View绘制树如下，此时View_1获取了焦点。整个focus链为Window-&gt;CompositeView_2-&gt;View_4。</p>
+
+
+<p>当用户调用View_1.focus()，View_1会通知CompositeView_1更新focus链，CompositeView_1会通知Window更新focus链，Window会通知CompositeView_2更新focus链，CompositeView_2会通知View_4更新focus链并取消focus。更新后的Focus链如下。</p>
+
+
+<p>这种链式结构可以方便地在一颗Window Tree上进行focus转移，有效地保证一个节点在获取焦点时，原先获取焦点的节点被blur掉，保证了focus的唯一性。并且通过链式结构可以轻易获取到Window Tree上正处于focus的节点。</p>
+<h3 id="按键和旋钮事件与Focus的转移"><a href="#按键和旋钮事件与Focus的转移" class="headerlink" title="按键和旋钮事件与Focus的转移"></a>按键和旋钮事件与Focus的转移</h3><h4 id="FocusManager概念介绍"><a href="#FocusManager概念介绍" class="headerlink" title="FocusManager概念介绍"></a>FocusManager概念介绍</h4><p>FocusManager是CompositeView上的焦点管理器，当产生按钮事件或旋钮事件的时候，FocusManager会按照用户配置好的条件找到下一个要focus的节点并调用focus()函数，此时view会按照上述的focus链机制focus&amp;blur相应节点。</p>
+<h4 id="按键事件与focus的转移"><a href="#按键事件与focus的转移" class="headerlink" title="按键事件与focus的转移"></a>按键事件与focus的转移</h4><p>按键事件目前主要包括”ArrowUp”、”ArrowLeft”、”ArrowRight”、”ArrowDown”四个类型，由focus的View首先接收到按键事件，但默认情况下这个View不会进行处理，而是交给View的parent即CompositeView处理，CompositeView会按照按键方向调用FocusManager.toUp(或者是toLeft、toRight、toDown)函数，然后FocusManager会按照View之间的方向&amp;距离计算下一个要focus的View。如果找不到可以focus的节点，则交给CompositeView的parent继续处理，直到找到Window为止。</p>
+
+
+
+<h4 id="旋钮事件与focus的转移"><a href="#旋钮事件与focus的转移" class="headerlink" title="旋钮事件与focus的转移"></a>旋钮事件与focus的转移</h4><p>旋钮事件目前主要包括”Tab”，并通过事件属性shiftKey判断是正向旋转还是逆向旋转。旋钮事件主要通过三种方式获取下一个要focus的view，下面将一一介绍，获取方式的优先级递减。</p>
+<ol>
+<li>通过设置focusNextTarget和focusPreviousTarget属性，来直接获取在旋钮旋转时下一个和上一个要focus的view，这个属性的优先级最高，但是不够灵活；</li>
+<li>通过设置tabIndex属性，直接通过Window的FocusManager按照tabIndex顺序在Window内找到下一个要focus的view，这个优先级次之；</li>
+<li>交给View的parent处理，通过父容器的FocusManager在父容器内找到下一个要focus的View，这个优先级最低，也是目前的通用算法。</li>
+</ol>
+<h3 id="Window切换间Focus逻辑"><a href="#Window切换间Focus逻辑" class="headerlink" title="Window切换间Focus逻辑"></a>Window切换间Focus逻辑</h3><p>应用开发经常会在两个Window之间切换，那么Window之间切换时，Focus要如何处理，本节主要讲解这个逻辑。</p>
+<p>首先在Window deActive时找到当前Window下正focus的View，并记录在该Window上。然后在Window active的时候判断这个View是否还在这个Window下面并且判断这个View的Visibility属性，当判断都为true时将这个View设为focus。如果判断为false，则将Window按照本身的FocusMode属性进行 focus。</p>
+<p>以上就达到了Window切换时的Focus记录功能。</p>
+<h3 id="失焦处理"><a href="#失焦处理" class="headerlink" title="失焦处理"></a>失焦处理</h3><p>目前有两处逻辑会引起失焦处理：1. 当一个View获得焦点后，一段时间没有key事件处理，做失焦处理；2. key事件转换到touch事件时，做失焦处理；</p>
+<p>失焦处理后会将失去焦点的View记录在Window上，当再次有Key事件上来时，判断这个View是否还在这个Window上，如果在则focus View， 如果不在则按Window的FocusMode对Window进行focus。</p>
+<h3 id="控件重写按键与旋钮逻辑"><a href="#控件重写按键与旋钮逻辑" class="headerlink" title="控件重写按键与旋钮逻辑"></a>控件重写按键与旋钮逻辑</h3><p>每一个控件都可以重写onKeyUp方法，并利用FocusManager按照每个控件各自的需求与特点重写事件与focus的逻辑。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UI/" rel="tag"># UI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/18/LayoutSummary/" rel="prev" title="LayoutSummary">
+      <i class="fa fa-chevron-left"></i> LayoutSummary
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/23/webgl%E7%BC%96%E7%A8%8B%E9%A1%BA%E5%BA%8F/" rel="next" title="webgl编程顺序">
+      webgl编程顺序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Focus-Summary"><span class="nav-number">1.</span> <span class="nav-text">Focus Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%B1%9E%E6%80%A7%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.0.1.</span> <span class="nav-text">基础属性介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#focusable"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">focusable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#focusMode"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">focusMode</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#focus-%E5%8F%8Afocus%E9%93%BE%E7%9A%84%E6%9E%84%E5%BB%BA%EF%BC%9B"><span class="nav-number">1.0.2.</span> <span class="nav-text">focus()及focus链的构建；</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#focus-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">focus()介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#view%E8%8E%B7%E5%BE%97%E7%84%A6%E7%82%B9%E5%90%8E%E5%A6%82%E4%BD%95%E8%B0%83%E6%95%B4%E4%B8%80%E9%A2%97%E7%BB%98%E5%88%B6%E6%A0%91%E7%9A%84focus%E9%93%BE"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">view获得焦点后如何调整一颗绘制树的focus链</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E5%92%8C%E6%97%8B%E9%92%AE%E4%BA%8B%E4%BB%B6%E4%B8%8EFocus%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.0.3.</span> <span class="nav-text">按键和旋钮事件与Focus的转移</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FocusManager%E6%A6%82%E5%BF%B5%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">FocusManager概念介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E4%BA%8B%E4%BB%B6%E4%B8%8Efocus%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">按键事件与focus的转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%8B%E9%92%AE%E4%BA%8B%E4%BB%B6%E4%B8%8Efocus%E7%9A%84%E8%BD%AC%E7%A7%BB"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">旋钮事件与focus的转移</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Window%E5%88%87%E6%8D%A2%E9%97%B4Focus%E9%80%BB%E8%BE%91"><span class="nav-number">1.0.4.</span> <span class="nav-text">Window切换间Focus逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E7%84%A6%E5%A4%84%E7%90%86"><span class="nav-number">1.0.5.</span> <span class="nav-text">失焦处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E4%BB%B6%E9%87%8D%E5%86%99%E6%8C%89%E9%94%AE%E4%B8%8E%E6%97%8B%E9%92%AE%E9%80%BB%E8%BE%91"><span class="nav-number">1.0.6.</span> <span class="nav-text">控件重写按键与旋钮逻辑</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ddpumpkin</p>
+  <div class="site-description" itemprop="description">记录一些我喜欢的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ddpumpkin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="GridSystem Of BootStrapBootStrap栅格系统功能简介 栅格系统用于通过一系列的行(row) 与列(column) 的组合来创建页面布局, 你的内容就可以放入这些创建好的布局中.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GridSystem">
+<meta property="og:url" content="http://example.com/2021/02/15/GridSystem/index.html">
+<meta property="og:site_name" content="ddpumpkin&#39;s blog">
+<meta property="og:description" content="GridSystem Of BootStrapBootStrap栅格系统功能简介 栅格系统用于通过一系列的行(row) 与列(column) 的组合来创建页面布局, 你的内容就可以放入这些创建好的布局中.">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-02-15T06:59:56.000Z">
+<meta property="article:modified_time" content="2021-02-16T02:53:19.443Z">
+<meta property="article:author" content="ddpumpkin">
+<meta property="article:tag" content="UI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/02/15/GridSystem/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>GridSystem | ddpumpkin's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ddpumpkin's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome to my blog!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/15/GridSystem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ddpumpkin">
+      <meta itemprop="description" content="记录一些我喜欢的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ddpumpkin's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GridSystem
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-15 14:59:56" itemprop="dateCreated datePublished" datetime="2021-02-15T14:59:56+08:00">2021-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-16 10:53:19" itemprop="dateModified" datetime="2021-02-16T10:53:19+08:00">2021-02-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="GridSystem-Of-BootStrap"><a href="#GridSystem-Of-BootStrap" class="headerlink" title="GridSystem Of BootStrap"></a>GridSystem Of BootStrap</h2><p>BootStrap栅格系统功能简介</p>
+<p>栅格系统用于通过一系列的行(row) 与列(column) 的组合来创建页面布局, 你的内容就可以放入这些创建好的布局中.</p>
+<a id="more"></a>
+
+<ol>
+<li>“行(row)” 必须包含在 .container (固定宽度) 或 .container_fluid (100% 宽度) 中, 以便为其赋予合适的排列 (aligment) 和内补 (padding).</li>
+<li>通过 “行(row)” 在水平方向创建一组 “列(column)”</li>
+<li>内容应当放置于 “列 (column)” 内, 并且, 只有 “列 (column)” 可以作为行 (row)的直接子元素</li>
+<li>通过为 列 设置padding属性, 从而创建列与列之间的间隔. 通过为 .row 元素设置负值margin 从而抵消为 .container 元素设置的padding.</li>
+<li>栅格系统中的列是通过 指定1到12 的值来表示其跨越的范围, 例如, 三个等宽的列可以使用三个 .col-xs-4来创建.</li>
+<li>如果 一 “行” 中包含了的 “列 (column)” 大于12, 多余的 列 所在的元素将被作为一个整体另起一行排列.</li>
+</ol>
+<p>&lt;% asset_img BootStrapGridSystem.png BootStrap栅格系统功能 %&gt;</p>
+<h3 id="重点属性"><a href="#重点属性" class="headerlink" title="重点属性"></a>重点属性</h3><h4 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h4><p>通过padding设置列 与 列之间的偏移.</p>
+<h4 id="多余的列将另起一行排列"><a href="#多余的列将另起一行排列" class="headerlink" title="多余的列将另起一行排列"></a>多余的列将另起一行排列</h4><p>如果在一个.row 内包含的列 大于12 个, 包含多余列 的元素将作为一个整体单元被另起一行排列.</p>
+<h4 id="列偏移"><a href="#列偏移" class="headerlink" title="列偏移"></a>列偏移</h4><p>使用 .col-md-offset-* 类可以将列向右侧偏移. 这些类实际是通过使用*选择器为当前元素增加了左侧的边距(margin). 例如, .col-md-offset-4 将类 .col-md-4 元素向右侧偏移了4个列的宽度.</p>
+<h4 id="列排序"><a href="#列排序" class="headerlink" title="列排序"></a>列排序</h4><p>通过使用 .col-md-push-* 和 .col-md-pull-* 类就可以很容易的改变列的顺序.</p>
+<p>&lt;% asset_img ColumnOffset.jpg 横向偏移的设置 %&gt;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;row&quot;</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;col-md-9 col-md-push-3&quot;</span>&gt;.col-md-<span class="number">9</span> .col-md-push-<span class="number">3</span>&lt;/div&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;col-md-3 col-md-pull-9&quot;</span>&gt;.col-md-<span class="number">3</span> .col-md-pull-<span class="number">9</span>&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Android中的GridLayout实现栅格布局"><a href="#Android中的GridLayout实现栅格布局" class="headerlink" title="Android中的GridLayout实现栅格布局"></a>Android中的GridLayout实现栅格布局</h3><p>网格由一组无限细线组成，将观察区域分隔成单元格. 内容主要放在这些单元格中.</p>
+<h4 id="GridLayout-功能"><a href="#GridLayout-功能" class="headerlink" title="GridLayout 功能"></a>GridLayout 功能</h4><ol>
+<li>可以自己设置布局中组件的排列方式;</li>
+<li>可以自定义网格布局中有多少行, 多少列;</li>
+<li>可以直接设置组件位于某行某列;</li>
+<li>可以设置组件横框几行或者几列;</li>
+</ol>
+<p>&lt;% asset_img AndroidGridLayout.jpg android栅格布局的实现 %&gt;</p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ol>
+<li>Rows 和 columns</li>
+</ol>
+<p>通过设定rows和columns 设定总共有多少个格子.</p>
+<p>Although cells do not normally overlap in a GridLayout, GridLayout does not prevent children being defined to occupy the same cell or group of cells. In this case however, there is no guarantee that children will not themselves overlap after the layout operation completes.</p>
+<p>尽管GridLayout的格子正常情况不会重叠, GridLayout不会阻止子元素占用同一个或同一组格子. 但是, 在这种情况下, 不能保证在布局操作完成后子项本身不会重叠</p>
+<p>GridLayout 子元素属性</p>
+<ol>
+<li>android: layout_column<br> 显示该空间的列. 例如, android::layout_column=”0”, 表示在第1列显示该控件; android:layout_column=”1”, 表示在第2列显示该控件.</li>
+<li>android: layout_columnSpan<br> 该控件所占的列数. 例如, android:layout_columnSpan=”2”, 表示该控件占2列.</li>
+<li>android: layout_row<br> 该控件所在行. 例如, android:layout_row=”0”, 表示在第1行显示该控件; android:layout_row=”1”, 表示在第2行显示该控件. 它和android:layout_column类似.</li>
+<li>android:layout_rowSpan<br> 该控件所占的行数. 例如, android:layout_rowSpan=”2”, 表示该控件占2行. 它和android:layout_columnSpan类似.</li>
+</ol>
+<h4 id="自定义GridLayout-在栅格系统中的应用"><a href="#自定义GridLayout-在栅格系统中的应用" class="headerlink" title="自定义GridLayout 在栅格系统中的应用"></a>自定义GridLayout 在栅格系统中的应用</h4><p>yunos GridLayout是基于Android GridLayout来做的. 为了适配栅格系统, GridLayoutParam新增加row, column属性, 类似于Android 的layout_column和layout_row, 表示子元素在第几列第几行展示.</p>
+<p>具体用法如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gl = <span class="keyword">new</span> GridLayout();</span><br><span class="line">gl.columns = <span class="number">12</span>;</span><br><span class="line">gl.rows = <span class="number">1</span>;</span><br><span class="line">gl.setLayoutParam(<span class="number">0</span>, <span class="string">&quot;column&quot;</span>, <span class="number">1</span>);</span><br><span class="line">gl.setLayoutParam(<span class="number">0</span>, <span class="string">&quot;row&quot;</span>, <span class="number">1</span>);</span><br><span class="line">gl.setLayoutParam(<span class="number">0</span>, <span class="string">&quot;columnSpan&quot;</span>, <span class="number">2</span>);</span><br><span class="line">gl.setLayoutParam(<span class="number">0</span>, <span class="string">&quot;rowSpan&quot;</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>以上代码表示, 第一个子元素, 从第二行第二列开始, 占据两行两列;</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UI/" rel="tag"># UI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/15/%E8%BD%A8%E9%81%93%E5%8A%A8%E7%94%BB/" rel="prev" title="轨道动画">
+      <i class="fa fa-chevron-left"></i> 轨道动画
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/15/commonjs%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3/" rel="next" title="commonjs中的模块循环依赖及其解决">
+      commonjs中的模块循环依赖及其解决 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GridSystem-Of-BootStrap"><span class="nav-number">1.</span> <span class="nav-text">GridSystem Of BootStrap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E7%82%B9%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">重点属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#padding"><span class="nav-number">1.1.1.</span> <span class="nav-text">padding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E4%BD%99%E7%9A%84%E5%88%97%E5%B0%86%E5%8F%A6%E8%B5%B7%E4%B8%80%E8%A1%8C%E6%8E%92%E5%88%97"><span class="nav-number">1.1.2.</span> <span class="nav-text">多余的列将另起一行排列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E5%81%8F%E7%A7%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">列偏移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.4.</span> <span class="nav-text">列排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android%E4%B8%AD%E7%9A%84GridLayout%E5%AE%9E%E7%8E%B0%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80"><span class="nav-number">1.2.</span> <span class="nav-text">Android中的GridLayout实现栅格布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GridLayout-%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.1.</span> <span class="nav-text">GridLayout 功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.2.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89GridLayout-%E5%9C%A8%E6%A0%85%E6%A0%BC%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.2.3.</span> <span class="nav-text">自定义GridLayout 在栅格系统中的应用</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">ddpumpkin</p>
+  <div class="site-description" itemprop="description">记录一些我喜欢的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ddpumpkin</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+</body>
+</html>

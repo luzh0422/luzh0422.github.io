@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="ddpumpkin&#39;s blog">
 <meta property="og:description" content="Focus Summary基础属性介绍focusable用来定义一个View是否可以被focus。只有当一个View的focusable属性为true时才可以被focus，换言之当一个View的focusable属性为false， 则它永远不会被focus。 focusMode用来定义一个CompositeView获取焦点时，是由CompositeView的子孙节点先获得焦点，还是由Composi">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/.com//10/18/FocusSummary/focus_1.jpg">
-<meta property="og:image" content="http://example.com/.com//10/18/FocusSummary/focus_2.jpg">
-<meta property="og:image" content="http://example.com/.com//10/18/FocusSummary/focus_3.jpg">
-<meta property="og:image" content="http://example.com/.com//10/18/FocusSummary/focus_4.jpg">
+<meta property="og:image" content="http://example.com/2020/10/18/FocusSummary/focus_1.jpg">
+<meta property="og:image" content="http://example.com/2020/10/18/FocusSummary/focus_2.jpg">
+<meta property="og:image" content="http://example.com/2020/10/18/FocusSummary/focus_3.jpg">
+<meta property="og:image" content="http://example.com/2020/10/18/FocusSummary/focus_4.jpg">
 <meta property="article:published_time" content="2020-10-18T06:17:09.000Z">
 <meta property="article:modified_time" content="2021-02-16T04:15:18.945Z">
 <meta property="article:author" content="ddpumpkin">
 <meta property="article:tag" content="UI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//10/18/FocusSummary/focus_1.jpg">
+<meta name="twitter:image" content="http://example.com/2020/10/18/FocusSummary/focus_1.jpg">
 
 <link rel="canonical" href="http://example.com/2020/10/18/FocusSummary/">
 
@@ -223,16 +223,16 @@
 <li>view及view的祖先节点的visibility属性和enabled属性都为true；</li>
 </ol>
 <h4 id="view获得焦点后如何调整一颗绘制树的focus链"><a href="#view获得焦点后如何调整一颗绘制树的focus链" class="headerlink" title="view获得焦点后如何调整一颗绘制树的focus链"></a>view获得焦点后如何调整一颗绘制树的focus链</h4><p>假设当前一棵View绘制树如下，此时View_1获取了焦点。整个focus链为Window-&gt;CompositeView_2-&gt;View_4。</p>
-<img src="/.com//10/18/FocusSummary/focus_1.jpg" class title="focus焦点链">
+<img src="/2020/10/18/FocusSummary/focus_1.jpg" class="" title="focus焦点链">
 
 <p>当用户调用View_1.focus()，View_1会通知CompositeView_1更新focus链，CompositeView_1会通知Window更新focus链，Window会通知CompositeView_2更新focus链，CompositeView_2会通知View_4更新focus链并取消focus。更新后的Focus链如下。</p>
-<img src="/.com//10/18/FocusSummary/focus_2.jpg" class title="focus焦点链">
+<img src="/2020/10/18/FocusSummary/focus_2.jpg" class="" title="focus焦点链">
 
 <p>这种链式结构可以方便地在一颗Window Tree上进行focus转移，有效地保证一个节点在获取焦点时，原先获取焦点的节点被blur掉，保证了focus的唯一性。并且通过链式结构可以轻易获取到Window Tree上正处于focus的节点。</p>
 <h3 id="按键和旋钮事件与Focus的转移"><a href="#按键和旋钮事件与Focus的转移" class="headerlink" title="按键和旋钮事件与Focus的转移"></a>按键和旋钮事件与Focus的转移</h3><h4 id="FocusManager概念介绍"><a href="#FocusManager概念介绍" class="headerlink" title="FocusManager概念介绍"></a>FocusManager概念介绍</h4><p>FocusManager是CompositeView上的焦点管理器，当产生按钮事件或旋钮事件的时候，FocusManager会按照用户配置好的条件找到下一个要focus的节点并调用focus()函数，此时view会按照上述的focus链机制focus&amp;blur相应节点。</p>
 <h4 id="按键事件与focus的转移"><a href="#按键事件与focus的转移" class="headerlink" title="按键事件与focus的转移"></a>按键事件与focus的转移</h4><p>按键事件目前主要包括”ArrowUp”、”ArrowLeft”、”ArrowRight”、”ArrowDown”四个类型，由focus的View首先接收到按键事件，但默认情况下这个View不会进行处理，而是交给View的parent即CompositeView处理，CompositeView会按照按键方向调用FocusManager.toUp(或者是toLeft、toRight、toDown)函数，然后FocusManager会按照View之间的方向&amp;距离计算下一个要focus的View。如果找不到可以focus的节点，则交给CompositeView的parent继续处理，直到找到Window为止。</p>
-<img src="/.com//10/18/FocusSummary/focus_3.jpg" class title="focus转移">
-<img src="/.com//10/18/FocusSummary/focus_4.jpg" class title="focus转移">
+<img src="/2020/10/18/FocusSummary/focus_3.jpg" class="" title="focus转移">
+<img src="/2020/10/18/FocusSummary/focus_4.jpg" class="" title="focus转移">
 
 <h4 id="旋钮事件与focus的转移"><a href="#旋钮事件与focus的转移" class="headerlink" title="旋钮事件与focus的转移"></a>旋钮事件与focus的转移</h4><p>旋钮事件目前主要包括”Tab”，并通过事件属性shiftKey判断是正向旋转还是逆向旋转。旋钮事件主要通过三种方式获取下一个要focus的view，下面将一一介绍，获取方式的优先级递减。</p>
 <ol>

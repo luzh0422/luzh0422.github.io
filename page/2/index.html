@@ -153,6 +153,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/23/webgl%E7%BC%96%E7%A8%8B%E9%A1%BA%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ddpumpkin">
+      <meta itemprop="description" content="记录一些我喜欢的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ddpumpkin's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/23/webgl%E7%BC%96%E7%A8%8B%E9%A1%BA%E5%BA%8F/" class="post-title-link" itemprop="url">webgl编程顺序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-23 18:46:54" itemprop="dateCreated datePublished" datetime="2020-10-23T18:46:54+08:00">2020-10-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-16 10:53:19" itemprop="dateModified" datetime="2021-02-16T10:53:19+08:00">2021-02-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="webgl编程顺序"><a href="#webgl编程顺序" class="headerlink" title="webgl编程顺序"></a>webgl编程顺序</h1><ol>
+<li><p>准备容器，在HTML5中，使用的是Canvas作为容器；</p>
+</li>
+<li><p>初始化上下文， <code>gl = canvas.getContext(&quot;webgl&quot;) || canvas.getContext(&quot;experimental-webgl&quot;);</code>;</p>
+</li>
+<li><p>初始化着色器，即构建shader和program；</p>
+</li>
+<li><p>生成加载模型数据，即给vertex和uniform传数据；</p>
+</li>
+<li><p>渲染，调用<code>gl.drawArrays()</code> 或者 <code>gl.drawElements()</code>;</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/18/FocusSummary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -523,7 +599,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

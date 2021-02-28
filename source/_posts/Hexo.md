@@ -86,3 +86,37 @@ tags:
 ### hexo d命令报错 ERROR Deployer not found: git
 
 `npm install hexo-deployer-git --save`
+
+### hexo支持数学公式
+
+本文主要使用NexT => MathJax => hexo-renderer-kramed的方式构建数学公式
+
+* npm uninstall hexo-renderer-marked
+* npm i hexo-renderer-kramed
+* 修改next主题配置文件
+    ```
+    # Math Formulas Render Support
+    math:
+    # Default (true) will load mathjax / katex script on demand.
+    # That is it only render those page which has `mathjax: true` in Front-matter.
+    # If you set it to false, it will load mathjax / katex srcipt EVERY PAGE.
+    per_page: true
+
+    # hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.
+    mathjax:
+        enable: true
+        # See: https://mhchem.github.io/MathJax-mhchem/
+        mhchem: false
+
+    # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.
+    katex:
+        enable: false
+        # See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex
+        copy_tex: false
+
+
+    vendors:
+        # MathJax
+        mathjax: //cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    ```
+* 在写每篇博文的时候，都需要Front-matter部分还是要加上语句：mathjax: true.否则，数学公式无法被正常渲染.

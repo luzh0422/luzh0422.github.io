@@ -28,7 +28,7 @@
 <meta property="og:description" content="Hexo’s BlogHexo’s Blog 搭建Hexo安装以及本地博客创建 安装Node.js: 在Node.js官网下载文件安装即可, 安装完成后通过 node -v 查看node版本信息;  安装Hexo: sudo npm install -g hexo;  博客初始化: mkdir myblog &amp; cd myblog &amp; hexo init;  生成本地网页文件并开启">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-10-12T09:27:10.000Z">
-<meta property="article:modified_time" content="2021-02-16T04:15:18.946Z">
+<meta property="article:modified_time" content="2021-02-28T15:06:16.882Z">
 <meta property="article:author" content="ddpumpkin">
 <meta name="twitter:card" content="summary">
 
@@ -76,7 +76,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -186,7 +190,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-16 12:15:18" itemprop="dateModified" datetime="2021-02-16T12:15:18+08:00">2021-02-16</time>
+                <time title="修改时间：2021-02-28 23:06:16" itemprop="dateModified" datetime="2021-02-28T23:06:16+08:00">2021-02-28</time>
               </span>
 
           
@@ -212,17 +216,15 @@
 </ol>
 <p>以上内容为本地博客创建,下面将讲述本地博客与github关联</p>
 <a id="more"></a>
-
 <hr>
-<ol start="5">
+<ol>
 <li><p>注册并登录github账号, 创建仓库, 仓库名称必须为&lt;用户名&gt;.github.io, 并关联ssh_key;</p>
 </li>
 <li><p>打开myblog文件夹下的_config.yml文件: vim _config.yml;</p>
 </li>
 <li><p>在 _config.yml 文件的最后部分, 将deploy配置如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: &lt;github仓库地址&gt;</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></li>
-<li><p>执行hexo g &amp; hexo d; 若执行hexo g出错则执行npm install hexo –save，若执行hexo d出错则执行npm install hexo-deployer-git –save</p>
-</li>
+<li>执行hexo g &amp; hexo d; 若执行hexo g出错则执行npm install hexo –save，若执行hexo d出错则执行npm install hexo-deployer-git –save</li>
 </ol>
 <h3 id="Hexo’s-小技巧"><a href="#Hexo’s-小技巧" class="headerlink" title="Hexo’s 小技巧"></a>Hexo’s 小技巧</h3><h4 id="Hexo-设置阅读全文"><a href="#Hexo-设置阅读全文" class="headerlink" title="Hexo - 设置阅读全文:"></a>Hexo - 设置阅读全文:</h4><ol>
 <li><p>在文章中使用&lt; !–more–&gt; 手动进行截断 这种方法可以根据文章的内容，自己在合适的位置添加 &lt; !–more–&gt; 标签，使用灵活，也是Hexo推荐的方法。</p>
@@ -254,6 +256,13 @@
 <li>编辑主题配置文件，在menu中打开tags；</li>
 </ol>
 <h3 id="hexo-d命令报错-ERROR-Deployer-not-found-git"><a href="#hexo-d命令报错-ERROR-Deployer-not-found-git" class="headerlink" title="hexo d命令报错 ERROR Deployer not found: git"></a>hexo d命令报错 ERROR Deployer not found: git</h3><p><code>npm install hexo-deployer-git --save</code></p>
+<h3 id="hexo支持数学公式"><a href="#hexo支持数学公式" class="headerlink" title="hexo支持数学公式"></a>hexo支持数学公式</h3><p>本文主要使用NexT =&gt; MathJax =&gt; hexo-renderer-kramed的方式构建数学公式</p>
+<ul>
+<li>npm uninstall hexo-renderer-marked</li>
+<li>npm i hexo-renderer-kramed</li>
+<li>修改next主题配置文件  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># Math Formulas Render Support</span><br><span class="line">math:</span><br><span class="line"># Default (true) will load mathjax &#x2F; katex script on demand.</span><br><span class="line"># That is it only render those page which has &#96;mathjax: true&#96; in Front-matter.</span><br><span class="line"># If you set it to false, it will load mathjax &#x2F; katex srcipt EVERY PAGE.</span><br><span class="line">per_page: true</span><br><span class="line"></span><br><span class="line"># hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span><br><span class="line">mathjax:</span><br><span class="line">    enable: true</span><br><span class="line">    # See: https:&#x2F;&#x2F;mhchem.github.io&#x2F;MathJax-mhchem&#x2F;</span><br><span class="line">    mhchem: false</span><br><span class="line"></span><br><span class="line"># hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span><br><span class="line">katex:</span><br><span class="line">    enable: false</span><br><span class="line">    # See: https:&#x2F;&#x2F;github.com&#x2F;KaTeX&#x2F;KaTeX&#x2F;tree&#x2F;master&#x2F;contrib&#x2F;copy-tex</span><br><span class="line">    copy_tex: false</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">vendors:</span><br><span class="line">    # MathJax</span><br><span class="line">    mathjax: &#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3&#x2F;es5&#x2F;tex-mml-chtml.js</span><br></pre></td></tr></table></figure></li>
+<li>在写每篇博文的时候，都需要Front-matter部分还是要加上语句：mathjax: true.否则，数学公式无法被正常渲染.</li>
+</ul>
 
     </div>
 
@@ -331,7 +340,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E2%80%99s-Blog"><span class="nav-number">1.</span> <span class="nav-text">Hexo’s Blog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo%E2%80%99s-Blog-%E6%90%AD%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">Hexo’s Blog 搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.1.</span> <span class="nav-text">Hexo安装以及本地博客创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E2%80%99s-%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">Hexo’s 小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hexo-%E8%AE%BE%E7%BD%AE%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Hexo - 设置阅读全文:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Next主题配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5PDF"><span class="nav-number">1.1.3.</span> <span class="nav-text">hexo博客中插入PDF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo%E5%A2%9E%E5%8A%A0tags%E3%80%81category"><span class="nav-number">1.1.4.</span> <span class="nav-text">hexo增加tags、category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-d%E5%91%BD%E4%BB%A4%E6%8A%A5%E9%94%99-ERROR-Deployer-not-found-git"><span class="nav-number">1.1.5.</span> <span class="nav-text">hexo d命令报错 ERROR Deployer not found: git</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E2%80%99s-Blog"><span class="nav-number">1.</span> <span class="nav-text">Hexo’s Blog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo%E2%80%99s-Blog-%E6%90%AD%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">Hexo’s Blog 搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.1.</span> <span class="nav-text">Hexo安装以及本地博客创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E2%80%99s-%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">Hexo’s 小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hexo-%E8%AE%BE%E7%BD%AE%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Hexo - 设置阅读全文:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Next主题配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5PDF"><span class="nav-number">1.1.3.</span> <span class="nav-text">hexo博客中插入PDF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo%E5%A2%9E%E5%8A%A0tags%E3%80%81category"><span class="nav-number">1.1.4.</span> <span class="nav-text">hexo增加tags、category</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-d%E5%91%BD%E4%BB%A4%E6%8A%A5%E9%94%99-ERROR-Deployer-not-found-git"><span class="nav-number">1.1.5.</span> <span class="nav-text">hexo d命令报错 ERROR Deployer not found: git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="nav-number">1.1.6.</span> <span class="nav-text">hexo支持数学公式</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -345,14 +354,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -454,6 +463,8 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+
+  
 
   
 

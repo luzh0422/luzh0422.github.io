@@ -77,7 +77,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -203,7 +207,6 @@
       
         <h1 id="openGL搭建"><a href="#openGL搭建" class="headerlink" title="openGL搭建"></a>openGL搭建</h1><p>本文主要讲解在Mac上搭建opengl开发环境，opengl开发主要要用到GLFW、GLAD、SOIL、GLM、ASSIMP这几个库，下面我会一一讲述这几个库在Mac上的环境配置。</p>
 <a id="more"></a>
-
 <h3 id="GLFW"><a href="#GLFW" class="headerlink" title="GLFW"></a>GLFW</h3><h3 id="GLAD"><a href="#GLAD" class="headerlink" title="GLAD"></a>GLAD</h3><p><del>这个位置可以写一下GLAD这个库的作用</del></p>
 <ol>
 <li><p>打开GLAD的在线服务。</p>
@@ -223,7 +226,7 @@
 <h3 id="GLM"><a href="#GLM" class="headerlink" title="GLM"></a>GLM</h3><p>GLM是OpenGL Mathematics的缩写，它是一个只有头文件的库，也就是说我们只需包含对应的头文件就行了，不用链接和编译。GLM可以在它们的网站上下载。把头文件的根目录复制到你的includes文件夹，然后你就可以使用这个库了。</p>
 <h3 id="SOIL"><a href="#SOIL" class="headerlink" title="SOIL"></a>SOIL</h3><p>大多数图形学处理的任务都需要读取图片到内存当中。当前存在着各种各样的图片格式，例如 jpeg, bmp, png 等等；SOIL 提供了将图片加载到内存当中的功能，避免了因繁杂的图片格式读取问题。</p>
 <ol>
-<li><p>首先下载(<a target="_blank" rel="noopener" href="http://www.lonesock.net/soil.html)[SOIL]%E5%AE%89%E8%A3%85%E5%8C%85%EF%BC%8C%E4%B8%80%E8%88%AC%E9%80%89%E6%8B%A9%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E5%B0%B1%E5%8F%AF%E4%BB%A5%EF%BC%8C%E4%B8%8B%E8%BD%BD%E4%B8%8B%E6%9D%A5%E5%90%8E%E8%A7%A3%E5%8E%8B%EF%BC%9B">http://www.lonesock.net/soil.html)[SOIL]安装包，一般选择最新版本就可以，下载下来后解压；</a></p>
+<li><p>首先下载(<a target="_blank" rel="noopener" href="http://www.lonesock.net/soil.html)[SOIL]安装包，一般选择最新版本就可以，下载下来后解压；">http://www.lonesock.net/soil.html)[SOIL]安装包，一般选择最新版本就可以，下载下来后解压；</a></p>
 </li>
 <li><p>然后在//Simple OpenGL Image Library/projects/makefile目录下新建一个名为obj的空文件夹;</p>
 </li>
@@ -237,7 +240,7 @@
 <h3 id="Assimp"><a href="#Assimp" class="headerlink" title="Assimp"></a>Assimp</h3><p>Assimp 能够导入很多种不同的模型文件格式（并也能够导出部分的格式），并将所有的模型数据加载至 Assimp 的通用数据结构中。</p>
 <p>Assimp的安装需要用到CMake GUI，请提前安装好，此处没有难点，正常安装就可以</p>
 <ol>
-<li>首先下载(<a target="_blank" rel="noopener" href="http://www.assimp.org/)[Assimp]%EF%BC%8C%E5%B9%B6%E8%A7%A3%E5%8E%8B%EF%BC%9B">http://www.assimp.org/)[Assimp]，并解压；</a></li>
+<li>首先下载(<a target="_blank" rel="noopener" href="http://www.assimp.org/)[Assimp]，并解压；">http://www.assimp.org/)[Assimp]，并解压；</a></li>
 <li>打开CMake gui，选择源代码目录和目标文件目录（自己创建一个就可以）</li>
 <li>点击 Configure(设置) 按钮，让 CMake 读取设置和源代码，然后选择工程的生成器 Unix Makefiles。</li>
 <li>CMake 会显示可选的编译选项用来配置最终生成的库。这里使用默认设置，并再次点击Configure(设置)按钮保存设置。</li>
@@ -246,7 +249,7 @@
 </ol>
 <h4 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h4><p>建议安装Assimp的新版本，本人用3.3.1版本make编译时发生错误，换了最新版本后就没有此问题；</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>以上五个库基本可以涵盖opengl学习的所有第三方库，当安装完以上五个库后，你就可以开启你的opengl学习旅程了。</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>(<a target="_blank" rel="noopener" href="https://learnopengl-cn.readthedocs.io/zh/latest/)[LearnOpenGL-CN]">https://learnopengl-cn.readthedocs.io/zh/latest/)[LearnOpenGL-CN]</a><br>(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/RDaneelOlivaw/p/6839366.html)[MAC">https://www.cnblogs.com/RDaneelOlivaw/p/6839366.html)[MAC</a> OS下安装SOIL]<br>(<a target="_blank" rel="noopener" href="http://blog.shenyuanluo.com/LearnOpenGLNote18.html)[Assimp]">http://blog.shenyuanluo.com/LearnOpenGLNote18.html)[Assimp]</a><br>(<a target="_blank" rel="noopener" href="http://blog.shenyuanluo.com/OpenGLEnvironment.html)[OpenGL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94">http://blog.shenyuanluo.com/OpenGLEnvironment.html)[OpenGL学习笔记（二）——</a> (macOS)</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>(<a target="_blank" rel="noopener" href="https://learnopengl-cn.readthedocs.io/zh/latest/)[LearnOpenGL-CN">https://learnopengl-cn.readthedocs.io/zh/latest/)[LearnOpenGL-CN</a>]<br>(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/RDaneelOlivaw/p/6839366.html)[MAC">https://www.cnblogs.com/RDaneelOlivaw/p/6839366.html)[MAC</a> OS下安装SOIL]<br>(<a target="_blank" rel="noopener" href="http://blog.shenyuanluo.com/LearnOpenGLNote18.html)[Assimp">http://blog.shenyuanluo.com/LearnOpenGLNote18.html)[Assimp</a>]<br>(<a target="_blank" rel="noopener" href="http://blog.shenyuanluo.com/OpenGLEnvironment.html)[OpenGL学习笔记（二）——">http://blog.shenyuanluo.com/OpenGLEnvironment.html)[OpenGL学习笔记（二）——</a> (macOS)</p>
 
     </div>
 
@@ -344,14 +347,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -453,6 +456,8 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+
+  
 
   
 

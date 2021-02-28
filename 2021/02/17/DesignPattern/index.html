@@ -100,7 +100,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -221,78 +225,55 @@
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本文旨在一文记录23中设计模式，包括Iterator、Adapter、Template、Factory、Singleton、Prototype、Builder、AbstractFactory、Bridge、Strategy、Composite、Decorator、Visitor、ChainOfResponsibility、Mediator、Facade、State、Memento、Observer、Proxy、FlyWeight、Command、Interpretor。主要通过一句话说明这个设计模式的特点与用处，并附上对应的类图。</p>
 <p>同时本文致力于一句话概括总结对应设计模式的功能特点，可能过于简洁，但是如果你对设计模式已经很了解，可以帮助你记忆和理解。如果你想了解更多设计模式的内容，可以参照《图解设计模式》这本书。</p>
 <a id="more"></a>
-
 <h2 id="类的功能-amp-类图"><a href="#类的功能-amp-类图" class="headerlink" title="类的功能 &amp; 类图"></a>类的功能 &amp; 类图</h2><h3 id="Iterator模式"><a href="#Iterator模式" class="headerlink" title="Iterator模式"></a>Iterator模式</h3><p>将数据存储和数据遍历分割。</p>
 <img src="/2021/02/17/DesignPattern/Iterator.jpg" class="" width="400" title="Iterator">
-
 <h3 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h3><p>利用现有功能适配新的功能。</p>
 <p>Adapter模式又分为类适配器（利用继承）和实例适配器（利用委托）。</p>
 <img src="/2021/02/17/DesignPattern/Adapter1.jpg" class="" width="400" title="类适配器">
-
 <img src="/2021/02/17/DesignPattern/Adapter2.jpg" class="" width="400" title="实例适配器">
-
 <h3 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h3><p>父类负责算法流程，子类负责具体的实现。</p>
 <img src="/2021/02/17/DesignPattern/Template.jpg" class="" width="200" title="Template">
-
 <h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><p>利用Template模式构建实例。</p>
 <img src="/2021/02/17/DesignPattern/Factory.jpg" class="" width="400" title="Factory">
-
 <h3 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h3><p>全局唯一单例模式，静态的getInstance和构造函数私有。</p>
 <img src="/2021/02/17/DesignPattern/Singleton.jpg" class="" width="400" title="Singleton">
-
 <h3 id="Prototype"><a href="#Prototype" class="headerlink" title="Prototype"></a>Prototype</h3><p>利用现有实例创建新的实例，用于构造实例时，需要复杂的设置，这样通过现有实例创建新的实例，就不需要重新设置了。</p>
 <p>主要是利用C++的拷贝构造函数。</p>
 <img src="/2021/02/17/DesignPattern/Prototype.jpg" class="" width="400" title="Prototype">
-
 <h3 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h3><p>用于构造复杂的实例。</p>
 <img src="/2021/02/17/DesignPattern/Builder.jpg" class="" width="400" title="Builder">
-
 <h3 id="AbstractFactory"><a href="#AbstractFactory" class="headerlink" title="AbstractFactory"></a>AbstractFactory</h3><p>抽象工厂通过组装抽象零件成为抽象产品。</p>
 <h3 id="Bridge"><a href="#Bridge" class="headerlink" title="Bridge"></a>Bridge</h3><p>将功能层侧接口和实现层次接口分开，避免过长的集成链。</p>
 <img src="/2021/02/17/DesignPattern/Bridge.jpg" class="" width="400" title="Bridge">
-
 <h3 id="Strategy"><a href="#Strategy" class="headerlink" title="Strategy"></a>Strategy</h3><p>利用委托模式，专门设置好Strategy类，便于整体替换算法。</p>
 <img src="/2021/02/17/DesignPattern/Strategy.jpg" class="" width="400" title="Strategy">
-
 <h3 id="Composite"><a href="#Composite" class="headerlink" title="Composite"></a>Composite</h3><p>内容和容器的一致性。通过继承来达到一致性，通过一致性达到递归包含。</p>
 <img src="/2021/02/17/DesignPattern/Composite.jpg" class="" width="400" title="Composite">
-
 <h3 id="Decorator"><a href="#Decorator" class="headerlink" title="Decorator"></a>Decorator</h3><p>修饰物和被修饰物的一致性，可以递归地扩展类的功能。</p>
 <img src="/2021/02/17/DesignPattern/Decorator.jpg" class="" width="400" title="Decorator">
-
 <h3 id="Visitor"><a href="#Visitor" class="headerlink" title="Visitor"></a>Visitor</h3><p>将数据存储和数据访问分开。</p>
 <img src="/2021/02/17/DesignPattern/Visitor.jpg" class="" width="400" title="Visitor">
-
 <h3 id="ChainOfResponsibility"><a href="#ChainOfResponsibility" class="headerlink" title="ChainOfResponsibility"></a>ChainOfResponsibility</h3><p>自己能处理就自己处理，自己处理不了就交给下一个处理。</p>
 <p>优点是每个类只需要负责自己的功能，问题是处理链过长，耗时会比较久。</p>
 <img src="/2021/02/17/DesignPattern/ChainOfResponsibility.jpg" class="" width="400" title="Responsibility">
-
 <h3 id="Mediator"><a href="#Mediator" class="headerlink" title="Mediator"></a>Mediator</h3><p>所有的处理都交给管理者来进行统一处理，避免各个类处理的问题。</p>
 <img src="/2021/02/17/DesignPattern/Mediator.jpg" class="" width="400" title="Mediator">
-
 <h3 id="Facade"><a href="#Facade" class="headerlink" title="Facade"></a>Facade</h3><p>忽略内部复杂的调用，对外只暴露简单的接口。该模式主要适用于框架结构复杂，调用复杂的情况下。</p>
 <img src="/2021/02/17/DesignPattern/Facade.jpg" class="" width="400" title="Facade">
-
 <h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><p>将依赖于状态的方法都放在State类中，这样就可以减少关于状态的判断。</p>
 <img src="/2021/02/17/DesignPattern/State.jpg" class="" width="400" title="State">
-
 <h3 id="Memento"><a href="#Memento" class="headerlink" title="Memento"></a>Memento</h3><p>用于保存类的状态，这样就可以回退对象的状态。</p>
 <p>主要是利用C++的友元函数。</p>
 <img src="/2021/02/17/DesignPattern/Memento.jpg" class="" width="400" title="Memento">
-
 <h3 id="Obsever"><a href="#Obsever" class="headerlink" title="Obsever"></a>Obsever</h3><p>根据对象状态的变化，通知Observer进行处理。</p>
 <img src="/2021/02/17/DesignPattern/Observer.jpg" class="" width="400" title="Obsever">
-
 <h3 id="FlyWeight"><a href="#FlyWeight" class="headerlink" title="FlyWeight"></a>FlyWeight</h3><p>通过尽量复用实例避免重复创建实例，来达到节省内存的用处。</p>
 <img src="/2021/02/17/DesignPattern/FlyWeight.jpg" class="" width="400" title="FlyWeight">
-
 <h3 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h3><p>能通过Proxy处理的就通过Proxy处理，不能通过的Proxy再通过本体处理。</p>
 <p>Proxy主要用于处理一些本地初始化时间长的问题。</p>
 <img src="/2021/02/17/DesignPattern/Proxy.jpg" class="" width="400" title="Proxy">
-
 <h3 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h3><p>利用Command代替函数的直接调用，这样就可以记录函数的调用过程（Command实例）。</p>
 <img src="/2021/02/17/DesignPattern/Command.jpg" class="" width="400" title="Command">
-
 <h3 id="Interpretor"><a href="#Interpretor" class="headerlink" title="Interpretor"></a>Interpretor</h3><p>利用一定的规则，将字符串解析为树形结构。</p>
 <img src="/2021/02/17/DesignPattern/Interpretor.jpg" class="" width="400" title="Interpretor">
 
@@ -313,7 +294,10 @@
     <a href="/2021/02/15/flutter%E5%88%9D%E8%AF%86/" rel="prev" title="flutter初识">
       <i class="fa fa-chevron-left"></i> flutter初识
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/28/%E9%B1%BC%E7%9C%BC%E7%9B%B8%E6%9C%BA%E8%B4%B4%E5%9B%BE%E5%88%B0%E5%8E%9F%E6%A8%A1%E5%9E%8B%E4%B8%8A/" rel="next" title="鱼眼相机贴图到原模型上">
+      鱼眼相机贴图到原模型上 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -386,14 +370,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -495,6 +479,8 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+
+  
 
   
 

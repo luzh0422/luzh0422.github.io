@@ -82,7 +82,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -209,22 +213,21 @@
         <h1 id="Transition算法-amp-机制总结"><a href="#Transition算法-amp-机制总结" class="headerlink" title="Transition算法 &amp; 机制总结"></a>Transition算法 &amp; 机制总结</h1><h2 id="Transition概念介绍"><a href="#Transition概念介绍" class="headerlink" title="Transition概念介绍"></a>Transition概念介绍</h2><p>Transition是UI动画系统的重要方面，它在两个状态之间增加了“时间轴”，而不是原先的“即时生效”。这为UI界面的交互设计提供了更多的可能性，使得应用交互更加自然。</p>
 <p>Transition主要包括PropertyTransition和LayoutTransition，它与UI其他模块的类图如图所示。</p>
 <a id="more"></a>
-
-<p><img src="/images/TransitionClassDiagram.png"></p>
+<p><img src="/images/TransitionClassDiagram.png" alt=""></p>
 <h2 id="PropertyTransiton"><a href="#PropertyTransiton" class="headerlink" title="PropertyTransiton"></a>PropertyTransiton</h2><p>PropertyTransition是为了在属性变换之间增加过渡效果，例如一个View的background由blue变为red，如果不使用Transition，则颜色是直接变化的，如果使用了PropertyTransition，则在background由blue变化为red会有一个过渡效果。</p>
 <p>而Transition与Animation最大的区别就是Transition只需要定义对应的Property，而不需要定义类似于Animation的from、to等属性，同时也不需要主动调用类似Animation的start、stop等方法，这样大大简化了开发过程。一个最简单的PropertyTransition使用例子如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> view = <span class="keyword">new</span> View();</span><br><span class="line"><span class="keyword">let</span> propertyTransition = <span class="keyword">new</span> PropertyTransition();</span><br><span class="line">propertyTransition.property = <span class="string">&quot;background&quot;</span>;</span><br><span class="line">view.addTransition(propertyTransition);</span><br></pre></td></tr></table></figure>
 <p>PropertyTransition的调用流程如图所示</p>
-<p><img src="/images/PropertyTransitionSequenceDiagram.png"></p>
+<p><img src="/images/PropertyTransitionSequenceDiagram.png" alt=""></p>
 <h3 id="MultiStateTransition"><a href="#MultiStateTransition" class="headerlink" title="MultiStateTransition"></a>MultiStateTransition</h3><p>MultiStateTransition是PropertyTransition最主要的一个应用场景。在UI开发过程中，多态的转变是最常用的功能之一，而多态变换伴随的主要就是属性变化，但是如果为这些属性都创建PropertyTransition并绑定到View上，工作量其实很大。所以MultiStateTransition主要是为了方便用户为多态改变设置Transition，其接口形式类似于MultiState的接口形式。具体例子如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> view  = <span class="keyword">new</span> View();</span><br><span class="line"></span><br><span class="line">view.multiState = &#123;</span><br><span class="line">    normal: &#123;</span><br><span class="line">        background: <span class="string">&quot;red&quot;</span>,</span><br><span class="line">        scaleX: <span class="number">1</span>,</span><br><span class="line">        scaleY: <span class="number">1</span>,</span><br><span class="line">        borderRadius: <span class="number">0</span>,</span><br><span class="line">        opacity: <span class="number">1.0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    pressed: &#123;</span><br><span class="line">        background: <span class="string">&quot;yellow&quot;</span>,</span><br><span class="line">        scaleX: <span class="number">1.2</span>,</span><br><span class="line">        scaleY: <span class="number">1.2</span>,</span><br><span class="line">        borderRadius: <span class="number">50</span>,</span><br><span class="line">        opacity: <span class="number">1.0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    disabled: &#123;</span><br><span class="line">        background: <span class="string">&quot;blue&quot;</span>,</span><br><span class="line">        scaleX: <span class="number">1</span>,</span><br><span class="line">        scaleY: <span class="number">1</span>,</span><br><span class="line">        borderRadius: <span class="number">0</span>,</span><br><span class="line">        opacity: <span class="number">0.2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">view.multiStateTransition = [ </span><br><span class="line">&#123;</span><br><span class="line">    states: &#123;</span><br><span class="line">        <span class="keyword">from</span>: <span class="string">&quot;pressed&quot;</span>,</span><br><span class="line">        to: <span class="string">&quot;normal&quot;</span>,</span><br><span class="line">        bidirectional: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">default</span>: &#123;</span><br><span class="line">        delay: <span class="number">0</span>,</span><br><span class="line">        duration: <span class="number">500</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    states: &#123;</span><br><span class="line">        <span class="keyword">from</span>: <span class="string">&quot;normal&quot;</span>,</span><br><span class="line">        to: <span class="string">&quot;pressed&quot;</span>，</span><br><span class="line">    &#125;,</span><br><span class="line">    properties: &#123;</span><br><span class="line">        background: &#123;</span><br><span class="line">            delay: <span class="number">100</span>,</span><br><span class="line">            duration: <span class="number">500</span></span><br><span class="line">        &#125;,</span><br><span class="line">        scaleX: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">        scaleY: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">        borderRadius: <span class="string">&quot;default&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">default</span>: &#123;</span><br><span class="line">        delay: <span class="number">100</span>,</span><br><span class="line">        duration: <span class="number">500</span>,</span><br><span class="line">        timingFunction: <span class="string">&quot;easeIn&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="keyword">default</span>: &#123;</span><br><span class="line">        delay: <span class="number">0</span>,</span><br><span class="line">        duration: <span class="number">1000</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 <p>MultiStateTransition的流程图如图所示</p>
-<p><img src="/images/MultiStateTransitionSequenceDiagram.jpg"></p>
+<p><img src="/images/MultiStateTransitionSequenceDiagram.jpg" alt=""></p>
 <h2 id="LayoutTransition"><a href="#LayoutTransition" class="headerlink" title="LayoutTransition"></a>LayoutTransition</h2><p>LayoutTransition主要针对更换Layout、增删子View、父容器高宽改变等引起Layout重新计算的场景，对容器内所有的View做一个几何变换的动画，即从当前top、left、width、height属性值过渡到重新计算到的top、left、width、height属性值。</p>
 <p>它的编程模型如下。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cv = <span class="keyword">new</span> CompositeView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> layoutTransition = <span class="keyword">new</span> LayoutTransition;</span><br><span class="line">cv.addTransition(layoutTransition);</span><br></pre></td></tr></table></figure>
 <p>它的流程如图所示。</p>
-<p><img src="/images/LayoutTransitionSequenceDiagram.jpg"></p>
+<p><img src="/images/LayoutTransitionSequenceDiagram.jpg" alt=""></p>
 <h2 id="设计小技巧"><a href="#设计小技巧" class="headerlink" title="设计小技巧"></a>设计小技巧</h2><ul>
 <li>在设计PropertyTransition时，利用TransitionManager控制所有的动画，这样不论有多少PropertyTransition，只需要监听一次vsync信号驱动动画，以此减少函数调用，进行优化。</li>
 <li>在设计LayoutTransition重新梳理Layout和Animation的关系，从而达到在Layout环境下Animation依然可以执行的效果。</li>
@@ -326,14 +329,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -435,6 +438,8 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+
+  
 
   
 

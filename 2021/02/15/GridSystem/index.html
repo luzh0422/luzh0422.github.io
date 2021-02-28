@@ -77,7 +77,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -204,7 +208,6 @@
         <h2 id="GridSystem-Of-BootStrap"><a href="#GridSystem-Of-BootStrap" class="headerlink" title="GridSystem Of BootStrap"></a>GridSystem Of BootStrap</h2><p>BootStrap栅格系统功能简介</p>
 <p>栅格系统用于通过一系列的行(row) 与列(column) 的组合来创建页面布局, 你的内容就可以放入这些创建好的布局中.</p>
 <a id="more"></a>
-
 <ol>
 <li>“行(row)” 必须包含在 .container (固定宽度) 或 .container_fluid (100% 宽度) 中, 以便为其赋予合适的排列 (aligment) 和内补 (padding).</li>
 <li>通过 “行(row)” 在水平方向创建一组 “列(column)”</li>
@@ -216,8 +219,8 @@
 <p>&lt;% asset_img BootStrapGridSystem.png BootStrap栅格系统功能 %&gt;</p>
 <h3 id="重点属性"><a href="#重点属性" class="headerlink" title="重点属性"></a>重点属性</h3><h4 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h4><p>通过padding设置列 与 列之间的偏移.</p>
 <h4 id="多余的列将另起一行排列"><a href="#多余的列将另起一行排列" class="headerlink" title="多余的列将另起一行排列"></a>多余的列将另起一行排列</h4><p>如果在一个.row 内包含的列 大于12 个, 包含多余列 的元素将作为一个整体单元被另起一行排列.</p>
-<h4 id="列偏移"><a href="#列偏移" class="headerlink" title="列偏移"></a>列偏移</h4><p>使用 .col-md-offset-* 类可以将列向右侧偏移. 这些类实际是通过使用*选择器为当前元素增加了左侧的边距(margin). 例如, .col-md-offset-4 将类 .col-md-4 元素向右侧偏移了4个列的宽度.</p>
-<h4 id="列排序"><a href="#列排序" class="headerlink" title="列排序"></a>列排序</h4><p>通过使用 .col-md-push-* 和 .col-md-pull-* 类就可以很容易的改变列的顺序.</p>
+<h4 id="列偏移"><a href="#列偏移" class="headerlink" title="列偏移"></a>列偏移</h4><p>使用 .col-md-offset-<em> 类可以将列向右侧偏移. 这些类实际是通过使用</em>选择器为当前元素增加了左侧的边距(margin). 例如, .col-md-offset-4 将类 .col-md-4 元素向右侧偏移了4个列的宽度.</p>
+<h4 id="列排序"><a href="#列排序" class="headerlink" title="列排序"></a>列排序</h4><p>通过使用 .col-md-push-<em> 和 .col-md-pull-</em> 类就可以很容易的改变列的顺序.</p>
 <p>&lt;% asset_img ColumnOffset.jpg 横向偏移的设置 %&gt;</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;row&quot;</span>&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;col-md-9 col-md-push-3&quot;</span>&gt;.col-md-<span class="number">9</span> .col-md-push-<span class="number">3</span>&lt;/div&gt;</span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;col-md-3 col-md-pull-9&quot;</span>&gt;.col-md-<span class="number">3</span> .col-md-pull-<span class="number">9</span>&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="Android中的GridLayout实现栅格布局"><a href="#Android中的GridLayout实现栅格布局" class="headerlink" title="Android中的GridLayout实现栅格布局"></a>Android中的GridLayout实现栅格布局</h3><p>网格由一组无限细线组成，将观察区域分隔成单元格. 内容主要放在这些单元格中.</p>
@@ -342,14 +345,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -451,6 +454,8 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+
+  
 
   
 

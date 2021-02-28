@@ -76,7 +76,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -203,7 +207,6 @@
         <h2 id="CommonJS中的模块循环依赖及其解决"><a href="#CommonJS中的模块循环依赖及其解决" class="headerlink" title="CommonJS中的模块循环依赖及其解决"></a>CommonJS中的模块循环依赖及其解决</h2><p>Node.js是CommonJS规范的主要实践者</p>
 <h3 id="CommonJS模块的加载原理"><a href="#CommonJS模块的加载原理" class="headerlink" title="CommonJS模块的加载原理"></a>CommonJS模块的加载原理</h3><p>CommonJS的一个模块就是一个脚本文件, require 命令第一次加载该脚本, 就会执行整个脚本, 然后在内存生成一个对象.</p>
 <a id="more"></a>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id: <span class="string">&#x27;...&#x27;</span>,</span><br><span class="line"><span class="built_in">exports</span>: &#123;...&#125;,</span><br><span class="line">loaded: <span class="literal">true</span>,</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>上面代码就是Node内部加载模块后生成的一个对象. 该对象的 id 属性是模块名, exports 属性是模块输出的各个接口, loaded 属性是一个布尔值, 表示该模块的脚本是否执行完毕.</p>
 <p>以后需要用到这个模块的时候, 就会到 exports 属性上面取值. 即时再次执行require 命令, 也不会再执行该模块, 而是到缓存中取值. 也就是说, CommonJS无论加载多少次, 都只会在第一次加载时运行一次, 以后再加载, 就返回第一次运行的结果, 除非手动清除系统缓存.</p>
@@ -318,14 +321,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -427,6 +430,8 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+
+  
 
   
 

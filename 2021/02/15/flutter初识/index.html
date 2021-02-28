@@ -76,7 +76,11 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -202,7 +206,6 @@
       
         <h2 id="flutter初学"><a href="#flutter初学" class="headerlink" title="flutter初学"></a>flutter初学</h2><p>Flutter应用本身就是一个widget，大部分widget都有一个build()方法。在应用程序的build方法中创建会在设备上显示的widget。</p>
 <a id="more"></a>
-
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_myHomePageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyHomePage</span>&gt; </span>&#123;</span><br><span class="line">    @override</span><br><span class="line">    Wid<span class="keyword">get</span> <span class="title">build</span>(<span class="params">BuildContext context</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Scaffold(</span><br><span class="line">            appBar: <span class="keyword">new</span> AppBar(</span><br><span class="line">                title: <span class="keyword">new</span> Text(widget.title),</span><br><span class="line">            ),</span><br><span class="line">            body: <span class="keyword">new</span> Center(</span><br><span class="line">                child: <span class="keyword">new</span> Text(<span class="string">&#x27;Hello World&#x27;</span>, <span class="attr">style</span>: <span class="keyword">new</span> TextStyle(fontSize: <span class="number">32.0</span>)),</span><br><span class="line">            ),</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="flutter的widget，element，renderObject之间的关系"><a href="#flutter的widget，element，renderObject之间的关系" class="headerlink" title="flutter的widget，element，renderObject之间的关系"></a>flutter的widget，element，renderObject之间的关系</h3><p>可以这样理解：</p>
 <ol>
@@ -370,14 +373,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -479,6 +482,8 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+
+  
 
   
 

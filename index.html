@@ -157,6 +157,75 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/11/shader%E5%8A%A0%E5%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ddpumpkin">
+      <meta itemprop="description" content="记录一些我喜欢的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ddpumpkin's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/11/shader%E5%8A%A0%E5%AF%86/" class="post-title-link" itemprop="url">shader加密</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-11 00:00:52 / 修改时间：00:03:48" itemprop="dateCreated datePublished" datetime="2021-07-11T00:00:52+08:00">2021-07-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="shader加密"><a href="#shader加密" class="headerlink" title="shader加密"></a>shader加密</h1><h2 id="为什么要做shader加密"><a href="#为什么要做shader加密" class="headerlink" title="为什么要做shader加密"></a>为什么要做shader加密</h2><p>正常情况下，在部署到线上环境的时候，会对代码进行压缩与混淆，从而达到代码加密的效果。但是由于webgl shader代码是写在字符串中的，在部署到线上环境的时候，对这部分代码会被当做普通字符串来处理，只会对其进行压缩而不会混淆。这种情况会导致在webgl shader中写的算法代码存在泄密风险。因此需要在开发过程中对这部分代码进行加密，在传给GPU的时候再进行解密，从而保证代码的私密性。</p>
+<h2 id="怎么做shader加密"><a href="#怎么做shader加密" class="headerlink" title="怎么做shader加密"></a>怎么做shader加密</h2><p>加密的手段总体上就像上文所说的，在开发过程中对shader代码进行编码，在传给GPU之前再对shader代码进行解码。</p>
+<p>编码的手段是通过将shader字符串中的每一个字符的Unicode码向右平移，然后根据平移后的Unicode码求出新的字符，再拼成“shader字符串”。</p>
+<p>解码的手段是编码的逆过程，首先拿到编码后的“shader字符串”，然后将每一个字符的Unicode码向左平移，还原“shader字符串”。</p>
+<p>通过这个过程，既保证了在代码层面，只能看到编码后的shader代码，又能保证传给GPU可用的shader代码。</p>
+<p>具体代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> shaderFiles = &#123;</span><br><span class="line">    <span class="string">&#x27;fragmentShader&#x27;</span>: <span class="string">&#x27;./_fragmentShader.glsl&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;vertexShader&#x27;</span>: <span class="string">&#x27;./_vertexShader.glsl&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;depthFragmentShader&#x27;</span>: <span class="string">&#x27;./_depthFragmentShader.glsl&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;depthVertexShader&#x27;</span>: <span class="string">&#x27;./_depthVertexShader.glsl&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> name <span class="keyword">in</span> shaderFiles) &#123;</span><br><span class="line">    <span class="keyword">let</span> code = fs.readFileSync(shaderFiles[name], <span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">    <span class="comment">// code = code.replace(/\n+/g, &#x27;&#x27;).replace(/\s+/g, &#x27; &#x27;)</span></span><br><span class="line">    fs.writeFileSync(<span class="string">`./<span class="subst">$&#123;name&#125;</span>.js`</span>, codeTransform(code))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">codeTransform</span> (<span class="params">code</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> defsFunctionString = defs.toString()</span><br><span class="line">    <span class="keyword">const</span> content = <span class="built_in">JSON</span>.stringify(obfs(code))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`export default (<span class="subst">$&#123;defsFunctionString&#125;</span>(\n<span class="subst">$&#123;content&#125;</span>\n))`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">obfs</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> key = <span class="number">13</span>, n = <span class="number">126</span>, o = <span class="number">0</span>, spliter = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>[o].split(spliter).map(</span><br><span class="line">        char =&gt; char.charCodeAt(o) &gt; n ?</span><br><span class="line">        char : <span class="built_in">String</span>.fromCharCode((char.charCodeAt(o) + key) % n)</span><br><span class="line">    ).join(spliter)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defs</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> key = <span class="number">113</span>, n = <span class="number">126</span>, o = <span class="number">0</span>, spliter = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>[o].split(spliter).map(</span><br><span class="line">        char =&gt; char.charCodeAt(o) &gt; n ?</span><br><span class="line">        char : <span class="built_in">String</span>.fromCharCode((char.charCodeAt(o) + key) % n)</span><br><span class="line">    ).join(spliter)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码编码前后对比</p>
+<p>代码编码前</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">varying vec3 vNormal;</span><br><span class="line">varying vec3 vViewPosition;</span><br><span class="line"></span><br><span class="line">uniform vec3 pano0Position;</span><br><span class="line">uniform mat4 pano0Matrix;</span><br><span class="line">uniform vec3 pano1Position;</span><br><span class="line">uniform mat4 pano1Matrix;</span><br><span class="line"></span><br><span class="line">varying vec3 pano0WorldPosition;</span><br><span class="line">varying vec3 pano1WorldPosition;</span><br><span class="line"></span><br><span class="line">#include &lt;common&gt;</span><br><span class="line">#include &lt;uv_pars_vertex&gt;</span><br><span class="line">#include &lt;uv2_pars_vertex&gt;</span><br><span class="line">#include &lt;color_pars_vertex&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="function"><span class="title">main</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">#include &lt;uv_vertex&gt;</span><br><span class="line">#include &lt;uv2_vertex&gt;</span><br><span class="line">#include &lt;color_vertex&gt;</span><br><span class="line">#include &lt;beginnormal_vertex&gt;</span><br><span class="line">#include &lt;defaultnormal_vertex&gt;</span><br><span class="line"></span><br><span class="line">vec3 transformed = vec3(position);</span><br><span class="line">vec4 mvPosition = modelViewMatrix * vec4(transformed, <span class="number">1.0</span>);</span><br><span class="line">vNormal = normalize(transformedNormal);</span><br><span class="line">vViewPosition = - mvPosition.xyz;</span><br><span class="line"></span><br><span class="line">vec4 worldPosition = modelMatrix * vec4(position, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line">vec3 vector0 = worldPosition.xyz - pano0Position;</span><br><span class="line">pano0WorldPosition = (vec4(vector0, <span class="number">1.0</span>) * pano0Matrix).xyz;</span><br><span class="line"></span><br><span class="line">vec3 vector1 = worldPosition.xyz - pano1Position;</span><br><span class="line">pano1WorldPosition = (vec4(vector1, <span class="number">1.0</span>) * pano1Matrix).xyz;</span><br><span class="line"></span><br><span class="line">gl_Position = projectionMatrix * modelViewMatrix * vec4(position, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码编码后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (<span class="function"><span class="keyword">function</span> <span class="title">defs</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">const</span> key = <span class="number">113</span>, n = <span class="number">126</span>, o = <span class="number">0</span>, spliter = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">return</span> <span class="built_in">arguments</span>[o].split(spliter).map(</span><br><span class="line">char =&gt; char.charCodeAt(o) &gt; n ?</span><br><span class="line">char : <span class="built_in">String</span>.fromCharCode((char.charCodeAt(o) + key) % n)</span><br><span class="line">).join(spliter)</span><br><span class="line">&#125;(</span><br><span class="line"><span class="string">&quot;\u0005n\u0001\bv&#123;t-\u0005rp@-\u0005[|\u0001znyH\u0017\u0005n\u0001\bv&#123;t-\u0005rp@-\u0005cvr\u0006]|\u0002v\u0003v|&#123;H\u0017\u0017\u0004&#123;vs|\u0001z-\u0005rp@-&#125;n&#123;|=]|\u0002v\u0003v|&#123;H\u0017\u0004&#123;vs|\u0001z-zn\u0003A-&#125;n&#123;|=Zn\u0003\u0001v\u0007H\u0017\u0004&#123;vs|\u0001z-\u0005rp@-&#125;n&#123;|&gt;]|\u0002v\u0003v|&#123;H\u0017\u0004&#123;vs|\u0001z-zn\u0003A-&#125;n&#123;|&gt;Zn\u0003\u0001v\u0007H\u0017\u0017\u0005n\u0001\bv&#123;t-\u0005rp@-&#125;n&#123;|=d|\u0001yq]|\u0002v\u0003v|&#123;H\u0017\u0005n\u0001\bv&#123;t-\u0005rp@-&#125;n&#123;|&gt;d|\u0001yq]|\u0002v\u0003v|&#123;H\u0017\u00170v&#123;py\u0004qr-Ip|zz|&#123;K\u00170v&#123;py\u0004qr-I\u0004\u0005l&#125;n\u0001\u0002l\u0005r\u0001\u0003r\u0007K\u00170v&#123;py\u0004qr-I\u0004\u0005?l&#125;n\u0001\u0002l\u0005r\u0001\u0003r\u0007K\u00170v&#123;py\u0004qr-Ip|y|\u0001l&#125;n\u0001\u0002l\u0005r\u0001\u0003r\u0007K\u0017\u0017\u0005|vq-znv&#123;56-\n\u0017\u0017--0v&#123;py\u0004qr-I\u0004\u0005l\u0005r\u0001\u0003r\u0007K\u0017--0v&#123;py\u0004qr-I\u0004\u0005?l\u0005r\u0001\u0003r\u0007K\u0017--0v&#123;py\u0004qr-Ip|y|\u0001l\u0005r\u0001\u0003r\u0007K\u0017--0v&#123;py\u0004qr-Iortv&#123;&#123;|\u0001znyl\u0005r\u0001\u0003r\u0007K\u0017--0v&#123;py\u0004qr-Iqrsn\u0004y\u0003&#123;|\u0001znyl\u0005r\u0001\u0003r\u0007K\u0017\u0017--\u0005rp@-\u0003\u0001n&#123;\u0002s|\u0001zrq-J-\u0005rp@5&#125;|\u0002v\u0003v|&#123;6H\u0017--\u0005rpA-z\u0005]|\u0002v\u0003v|&#123;-J-z|qrycvr\u0006Zn\u0003\u0001v\u0007-7-\u0005rpA5\u0003\u0001n&#123;\u0002s|\u0001zrq9-&gt;;=6H\u0017--\u0005[|\u0001zny-J-&#123;|\u0001znyv\tr5\u0003\u0001n&#123;\u0002s|\u0001zrq[|\u0001zny6H\u0017--\u0005cvr\u0006]|\u0002v\u0003v|&#123;-J-:-z\u0005]|\u0002v\u0003v|&#123;;\u0007\b\tH\u0017\u0017--\u0005rpA-\u0006|\u0001yq]|\u0002v\u0003v|&#123;-J-z|qryZn\u0003\u0001v\u0007-7-\u0005rpA5&#125;|\u0002v\u0003v|&#123;9-&gt;;=6H\u0017\u0017--\u0005rp@-\u0005rp\u0003|\u0001=-J-\u0006|\u0001yq]|\u0002v\u0003v|&#123;;\u0007\b\t-:-&#125;n&#123;|=]|\u0002v\u0003v|&#123;H\u0017--&#125;n&#123;|=d|\u0001yq]|\u0002v\u0003v|&#123;-J-5\u0005rpA5\u0005rp\u0003|\u0001=9-&gt;;=6-7-&#125;n&#123;|=Zn\u0003\u0001v\u00076;\u0007\b\tH\u0017\u0017--\u0005rp@-\u0005rp\u0003|\u0001&gt;-J-\u0006|\u0001yq]|\u0002v\u0003v|&#123;;\u0007\b\t-:-&#125;n&#123;|&gt;]|\u0002v\u0003v|&#123;H\u0017--&#125;n&#123;|&gt;d|\u0001yq]|\u0002v\u0003v|&#123;-J-5\u0005rpA5\u0005rp\u0003|\u0001&gt;9-&gt;;=6-7-&#125;n&#123;|&gt;Zn\u0003\u0001v\u00076;\u0007\b\tH\u0017\u0017--tyl]|\u0002v\u0003v|&#123;-J-&#125;\u0001|wrp\u0003v|&#123;Zn\u0003\u0001v\u0007-7-z|qrycvr\u0006Zn\u0003\u0001v\u0007-7-\u0005rpA5&#125;|\u0002v\u0003v|&#123;9-&gt;;=6H\u0017\f&quot;</span></span><br><span class="line">))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/28/%E9%B1%BC%E7%9C%BC%E7%9B%B8%E6%9C%BA%E8%B4%B4%E5%9B%BE%E5%88%B0%E5%8E%9F%E6%A8%A1%E5%9E%8B%E4%B8%8A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -782,82 +851,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/28/%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="ddpumpkin">
-      <meta itemprop="description" content="记录一些我喜欢的">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ddpumpkin's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/28/%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">优化方案</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-28 15:39:01" itemprop="dateCreated datePublished" datetime="2020-10-28T15:39:01+08:00">2020-10-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-16 10:53:19" itemprop="dateModified" datetime="2021-02-16T10:53:19+08:00">2021-02-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h1><h3 id="优化思路"><a href="#优化思路" class="headerlink" title="优化思路"></a>优化思路</h3><ol>
-<li>算法优化（通过剪枝等操作优化算法时间复杂度）；</li>
-<li>调度优化（能不能在构造中进行运算、能不能将多次运算集中到一次运算、异步运算等）；</li>
-<li>cache（将计算的结果cache住，避免多次计算）；</li>
-</ol>
-<h3 id="具体优化case"><a href="#具体优化case" class="headerlink" title="具体优化case"></a>具体优化case</h3><ol>
-<li>利用算法进行优化，例如RelativeLayout，将原先的回溯算法改为拓扑排序算法，在算法层面上减少耗时；</li>
-<li>利用cache机制进行优化，将需要多次计算并且得到的是相同的结果的内容要进行cache，下次直接读取cache，避免多次计算引起的耗时；</li>
-<li>将需要多次就算的内容放在构造中完成，这样每次调用函数时就不需要计算了；</li>
-<li>利用异步机制或者帧事件，将每次属性引起的Layout都放到下一帧统一计算，减少计算次数，得到优化；</li>
-<li>剪枝，对同样的计算逻辑进行剪枝；</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -927,7 +920,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

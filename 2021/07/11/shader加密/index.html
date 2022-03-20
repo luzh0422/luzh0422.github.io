@@ -28,7 +28,7 @@
 <meta property="og:description" content="shader加密为什么要做shader加密正常情况下，在部署到线上环境的时候，会对代码进行压缩与混淆，从而达到代码加密的效果。但是由于webgl shader代码是写在字符串中的，在部署到线上环境的时候，对这部分代码会被当做普通字符串来处理，只会对其进行压缩而不会混淆。这种情况会导致在webgl shader中写的算法代码存在泄密风险。因此需要在开发过程中对这部分代码进行加密，在传给GPU的时候再">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-10T16:00:52.000Z">
-<meta property="article:modified_time" content="2021-07-10T16:03:48.950Z">
+<meta property="article:modified_time" content="2021-07-10T16:04:34.000Z">
 <meta property="article:author" content="ddpumpkin">
 <meta name="twitter:card" content="summary">
 
@@ -184,7 +184,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-07-11 00:00:52 / 修改时间：00:03:48" itemprop="dateCreated datePublished" datetime="2021-07-11T00:00:52+08:00">2021-07-11</time>
+              <time title="创建时间：2021-07-11 00:00:52 / 修改时间：00:04:34" itemprop="dateCreated datePublished" datetime="2021-07-11T00:00:52+08:00">2021-07-11</time>
             </span>
 
           
@@ -199,6 +199,7 @@
 
       
         <h1 id="shader加密"><a href="#shader加密" class="headerlink" title="shader加密"></a>shader加密</h1><h2 id="为什么要做shader加密"><a href="#为什么要做shader加密" class="headerlink" title="为什么要做shader加密"></a>为什么要做shader加密</h2><p>正常情况下，在部署到线上环境的时候，会对代码进行压缩与混淆，从而达到代码加密的效果。但是由于webgl shader代码是写在字符串中的，在部署到线上环境的时候，对这部分代码会被当做普通字符串来处理，只会对其进行压缩而不会混淆。这种情况会导致在webgl shader中写的算法代码存在泄密风险。因此需要在开发过程中对这部分代码进行加密，在传给GPU的时候再进行解密，从而保证代码的私密性。</p>
+<a id="more"></a>
 <h2 id="怎么做shader加密"><a href="#怎么做shader加密" class="headerlink" title="怎么做shader加密"></a>怎么做shader加密</h2><p>加密的手段总体上就像上文所说的，在开发过程中对shader代码进行编码，在传给GPU之前再对shader代码进行解码。</p>
 <p>编码的手段是通过将shader字符串中的每一个字符的Unicode码向右平移，然后根据平移后的Unicode码求出新的字符，再拼成“shader字符串”。</p>
 <p>解码的手段是编码的逆过程，首先拿到编码后的“shader字符串”，然后将每一个字符的Unicode码向左平移，还原“shader字符串”。</p>
@@ -224,10 +225,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/02/28/%E9%B1%BC%E7%9C%BC%E7%9B%B8%E6%9C%BA%E8%B4%B4%E5%9B%BE%E5%88%B0%E5%8E%9F%E6%A8%A1%E5%9E%8B%E4%B8%8A/" rel="prev" title="鱼眼相机贴图到原模型上">
-      <i class="fa fa-chevron-left"></i> 鱼眼相机贴图到原模型上
+    <a href="/2021/02/17/DesignPattern/" rel="prev" title="DesignPattern">
+      <i class="fa fa-chevron-left"></i> DesignPattern
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/22/ThreeJS-OrbitControl%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="next" title="ThreeJS_OrbitControl源码阅读">
+      ThreeJS_OrbitControl源码阅读 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -300,14 +304,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -334,7 +338,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

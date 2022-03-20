@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="git commandgit-resotre 和git-reset的区别 git restore用于处理工作区的文件，命令用于将在工作区，但不在暂存区的文件还原。   git restore —staged用于将已经提交到缓存区的文件，从缓存区拉出，但不还原文件。  git reset用于处理分支的提交记录，可以将当前指针在几个提交记录间切换。">
+  <meta name="description" content="渲染渲染按大体分就三个步骤：  从根节点向下更新每个节点的modelViewMatrix； 将物体分为透明物体和不透明物体，然后按z轴排序； 然后按顺序一个物体一个物体的进行渲染；（ThreeJS的渲染过程是一个物体一个物体进行渲染的，然后组合成整个场景）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gitCommand">
-<meta property="og:url" content="http://example.com/2021/01/06/gitCommand/index.html">
+<meta property="og:title" content="threejs个人心得">
+<meta property="og:url" content="http://example.com/2021/12/01/threejs%E4%B8%AA%E4%BA%BA%E5%BF%83%E5%BE%97/index.html">
 <meta property="og:site_name" content="ddpumpkin&#39;s blog">
-<meta property="og:description" content="git commandgit-resotre 和git-reset的区别 git restore用于处理工作区的文件，命令用于将在工作区，但不在暂存区的文件还原。   git restore —staged用于将已经提交到缓存区的文件，从缓存区拉出，但不还原文件。  git reset用于处理分支的提交记录，可以将当前指针在几个提交记录间切换。">
+<meta property="og:description" content="渲染渲染按大体分就三个步骤：  从根节点向下更新每个节点的modelViewMatrix； 将物体分为透明物体和不透明物体，然后按z轴排序； 然后按顺序一个物体一个物体的进行渲染；（ThreeJS的渲染过程是一个物体一个物体进行渲染的，然后组合成整个场景）">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-01-06T04:40:36.000Z">
-<meta property="article:modified_time" content="2021-02-16T02:53:19.450Z">
+<meta property="article:published_time" content="2021-12-01T09:49:43.000Z">
+<meta property="article:modified_time" content="2021-12-01T09:52:00.000Z">
 <meta property="article:author" content="ddpumpkin">
+<meta property="article:tag" content="ThreeJS">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/01/06/gitCommand/">
+<link rel="canonical" href="http://example.com/2021/12/01/threejs%E4%B8%AA%E4%BA%BA%E5%BF%83%E5%BE%97/">
 
 
 <script id="page-configurations">
@@ -45,7 +46,7 @@
   };
 </script>
 
-  <title>gitCommand | ddpumpkin's blog</title>
+  <title>threejs个人心得 | ddpumpkin's blog</title>
   
 
 
@@ -160,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/gitCommand/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/01/threejs%E4%B8%AA%E4%BA%BA%E5%BF%83%E5%BE%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -173,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          gitCommand
+          threejs个人心得
         </h1>
 
         <div class="post-meta">
@@ -182,16 +183,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-01-06 12:40:36" itemprop="dateCreated datePublished" datetime="2021-01-06T12:40:36+08:00">2021-01-06</time>
+              <time title="创建时间：2021-12-01 17:49:43 / 修改时间：17:52:00" itemprop="dateCreated datePublished" datetime="2021-12-01T17:49:43+08:00">2021-12-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-16 10:53:19" itemprop="dateModified" datetime="2021-02-16T10:53:19+08:00">2021-02-16</time>
-              </span>
 
           
 
@@ -204,13 +199,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="git-command"><a href="#git-command" class="headerlink" title="git command"></a>git command</h1><h3 id="git-resotre-和git-reset的区别"><a href="#git-resotre-和git-reset的区别" class="headerlink" title="git-resotre 和git-reset的区别"></a>git-resotre 和git-reset的区别</h3><ul>
-<li><p>git restore用于处理工作区的文件，命令用于将在工作区，但不在暂存区的文件还原。</p>
-<p>  git restore —staged用于将已经提交到缓存区的文件，从缓存区拉出，但不还原文件。</p>
-</li>
-<li><p>git reset用于处理分支的提交记录，可以将当前指针在几个提交记录间切换。</p>
-</li>
-</ul>
+        <h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><p>渲染按大体分就三个步骤：</p>
+<ol>
+<li>从根节点向下更新每个节点的modelViewMatrix；</li>
+<li>将物体分为透明物体和不透明物体，然后按z轴排序；</li>
+<li>然后按顺序一个物体一个物体的进行渲染；（<strong>ThreeJS的渲染过程是一个物体一个物体进行渲染的，然后组合成整个场景</strong>）</li>
+</ol>
 
     </div>
 
@@ -219,6 +213,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ThreeJS/" rel="tag"># ThreeJS</a>
+          </div>
 
         
 
@@ -226,12 +223,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/24/cb-never-called/" rel="prev" title="cb_never_called">
-      <i class="fa fa-chevron-left"></i> cb_never_called
+    <a href="/2021/07/22/ThreeJS-OrbitControl%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="prev" title="ThreeJS_OrbitControl源码阅读">
+      <i class="fa fa-chevron-left"></i> ThreeJS_OrbitControl源码阅读
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/02/15/%E8%BD%A8%E9%81%93%E5%8A%A8%E7%94%BB/" rel="next" title="轨道动画">
-      轨道动画 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/03/20/npm%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="next" title="npm版本控制">
+      npm版本控制 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -291,7 +288,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-command"><span class="nav-number">1.</span> <span class="nav-text">git command</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-resotre-%E5%92%8Cgit-reset%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.0.1.</span> <span class="nav-text">git-resotre 和git-reset的区别</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B2%E6%9F%93"><span class="nav-number">1.</span> <span class="nav-text">渲染</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
